@@ -2,6 +2,7 @@
 
 %include include/config.user.cylc
 %include include/config.frontera.cylc
+%include include/config.experiment.cylc
 
 [meta]
      title = "Cylc suite for ufs-s2swa"
@@ -33,5 +34,3 @@
 # Specify pre-processing and prodcution tasks
     %include include/tasks.production.cylc
 
-# Specify post-processing tasks
-    %include include/tasks.postproc.cylc
