@@ -1,0 +1,12 @@
+# Set account
+{% set ACCOUNT = {{ACCOUNT}} %}
+
+# Set queue
+{% set QUEUE = "normal" %}
+
+# Set scratch directory
+{% set SCRATCH = {{SCRATCH}} %}
+
+# Set work directory
+{% set WORK = {{WORK}} %}
+
