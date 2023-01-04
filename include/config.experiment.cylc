@@ -1,0 +1,58 @@
+{% set RESOL = "C384" %}
+{% set NHOURS = 31*24 %}
+{% set RUNLEN = "PT16H" %}
+{% set EXPTYPE = "prototype-p8" %}
+{% set EXPNAME = "two_year_ensemble.reduced_restart" %}
+{% set CLEAN_FLAG = ".true." %}
+{% set CORES_PER_NODE = 36 %}
+
+# Define resolution-specific layout
+{% if RESOL == "C384" %}
+    {% set LAYOUT_X = 12 %}
+    {% set LAYOUT_Y = 16 %}
+    {% set WRITE_GROUPS = 3 %}
+    {% set WRITE_TASKS = 3*CORES_PER_NODE %}
+    {% set NPROCS_OCN = 5*CORES_PER_NODE %}
+    {% set NPROCS_ICE = 3*CORES_PER_NODE  %}
+    {% set NPROCS_WW3 = 3*CORES_PER_NODE %}
+    {% set NPROCS_MED = 8*CORES_PER_NODE %}
+    {% set NPX = 385 %}
+    {% set NPY = 385 %}
+    {% set DT_ATM = 300 %}
+    {% set SOILM = "global_soilmgldas.statsgo.t766.1536.768.grb" %}
+{% endif %}
+{% if RESOL == "C768" %}
+    {% set LAYOUT_X = 24 %}
+    {% set LAYOUT_Y = 16 %}
+    {% set WRITE_GROUPS = 4 %}
+    {% set WRITE_TASKS = 48 %}
+    {% set NPROCS_OCN = 120 %}
+    {% set NPROCS_ICE = 48  %}
+    {% set NPROCS_WW3 = 48  %}
+    {% set NPX = 769 %}
+    {% set NPY = 769 %}
+    {% set DT_ATM = 150 %}
+    {% set SOILM = "global_soilmgldas.statsgo.t1534.3072.1536.grb" %}
+{% endif %}
+
+# Calculate layout details 
+{% set NPROCS = (6*LAYOUT_X*LAYOUT_Y)+(WRITE_GROUPS*WRITE_TASKS)+NPROCS_OCN+NPROCS_ICE+NPROCS_WW3 %}
+{% set MED_PE_STR = 0 %}
+{% set MED_PE_END = NPROCS_MED %}
+{% set CHM_PE_STR = 0 %}
+{% set CHM_PE_END = 6*LAYOUT_X*LAYOUT_Y-1 %} 
+{% set ATM_PE_STR = 0 %}
+{% set ATM_PE_END = ATM_PE_STR+(6*LAYOUT_X*LAYOUT_Y)+(WRITE_GROUPS*WRITE_TASKS)-1 %}
+{% set OCN_PE_STR = ATM_PE_END+1 %} 
+{% set OCN_PE_END = OCN_PE_STR+NPROCS_OCN-1 %}
+{% set ICE_PE_STR = OCN_PE_END+1 %}
+{% set ICE_PE_END = ICE_PE_STR+NPROCS_ICE-1 %}
+{% set WW3_PE_STR = ICE_PE_END+1 %}
+{% set WW3_PE_END = WW3_PE_STR+NPROCS_WW3-1 %}
+
+{% set CHECK = NPROCS % CORES_PER_NODE %}
+{% if CHECK > 0 %}
+   {% set NNODES = 1+NPROCS//CORES_PER_NODE %}
+{% else %}
+   {% set NNODES = NPROCS//CORES_PER_NODE %}
+{% endif %}
