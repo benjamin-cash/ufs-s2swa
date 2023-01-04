@@ -1,0 +1,12 @@
+# Set account
+{% set ACCOUNT = "ATM22010" %}
+
+# Set queue
+{% set QUEUE = "normal" %}
+
+# Set scratch directory
+{% set SCRATCH = "/scratch1/02441/bcash" %}
+
+# Set work directory
+{% set WORK = "/work2/02441/bcash/frontera/" %}
+

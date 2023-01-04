@@ -1,0 +1,2 @@
+{% set USER_EMAIL = "bcash@gmu.edu" %}
+{% set USERID = "bcash" %}

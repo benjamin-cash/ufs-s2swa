@@ -1,0 +1,57 @@
+#!jinja2
+
+%include include/config.user.cylc
+%include include/config.frontera.cylc
+%include include/config.experiment.cylc
+
+[meta]
+     title = "Cylc suite for ensemble p8 batch submit with restart"
+[task parameters]
+     ldate = 2012010100
+     mem = mem007,mem008,mem009, mem010
+
+[scheduling]
+    cycling mode = integer
+    initial cycle point = 1
+    final cycle point = 24
+    [[graph]]
+        R1 = """
+            est_run_dir<ldate,mem> => 
+            copy_exec_fixed_files<ldate,mem> =>
+            copy_fv3_fix_files<ldate,mem> =>
+            copy_fv3_resol_files<ldate,mem> =>
+            copy_cpl_fixed_files<ldate,mem> =>
+            copy_mom6_fixed_files<ldate,mem> =>
+            copy_cice6_fixed_files<ldate,mem> =>
+            copy_ww3_fixed_files<ldate,mem> =>
+            copy_post_files<ldate,mem> =>
+            copy_aero_fixed_files<ldate,mem> =>
+            copy_ic_files<ldate,mem> =>
+            expand_templates<ldate,mem> => run_model<ldate,mem> => update_restart<ldate,mem>
+        """
+        P1 = """
+            run_model<ldate,mem>=>update_restart<ldate,mem>
+            update_restart<ldate,mem>[-P1] => run_model<ldate,mem>
+        """
+#        R1/$ = """        
+#            generate_geopotential_launcher<ldate,mem> => 
+#            run_geopotential_launcher<ldate,mem>
+#        """
+#        generate_vertical_interp_launcher<ldate,mem> =>
+#        run_vertical_interp_launcher<ldate,mem>=>
+#        generate_extract_surface_field_launcher<ldate,mem> =>
+#        run_extract_surface_field_launcher<ldate,mem> =>
+#        generate_combine_field_launcher<ldate,mem> =>
+#        run_combine_field_launcher<ldate,mem>
+        
+   
+[runtime]
+	
+# Specify runtime environment variables and paths
+	%include include/config.task.environment.cylc
+
+# Specify pre-processing and prodcution tasks
+    %include include/tasks.production.cylc
+
+# Specify post-processing tasks
+    %include include/tasks.postproc.cylc
