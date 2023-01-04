@@ -2,7 +2,7 @@
 {% set NHOURS = 31*24 %}
 {% set RUNLEN = "PT16H" %}
 {% set EXPTYPE = "prototype-p8" %}
-{% set EXPNAME = "two_year_ensemble.reduced_restart" %}
+{% set EXPNAME = "ufs-s2swa.test" %}
 {% set CLEAN_FLAG = ".true." %}
 {% set CORES_PER_NODE = 36 %}
 

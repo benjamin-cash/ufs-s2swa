@@ -4,22 +4,22 @@
         [[[environment]]]
             CLEAN_FLAG = {{CLEAN_FLAG}}
 
-    [[copy_exec_fixed_files<ldate,mem>]]
-    	inherit = STAGE_FILES
-        script = "bash stage_model_files.sh"
-		[[[environment]]]
-			SUBDIR = "EXEC"
-			FLIST = "file_list.txt"	
-            CMD = "cp"
-
-    [[expand_templates<ldate,mem>]]
+    [[create_initial_input_nml<ldate,mem>]]
         inherit = MODEL_CONFIG_ENV
         script = "bash generate_model_files_from_templates.sh"
+        [[[environment]]]
+            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/cpld_control.nml.IN"
+            output = "input.nml" 
+            %include include/config.prototype-p8.initial.input.nml.cylc
 
-    [[update_restart<ldate,mem>]]
+    [[create_restart_input_nml<ldate,mem>]]
         inherit = MODEL_CONFIG_ENV
-        script = "bash update_for_restart.sh"
-    
+        script = "bash generate_model_files_from_templates.sh"
+        [[[environment]]]
+            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/cpld_control.nml.IN"
+            output = "input.nml"
+            %include include/config.prototype-p8.restart.input.nml.cylc
+
     [[run_model<ldate,mem>]]
         inherit = MODEL_CONFIG_ENV
         script = "echo run model"

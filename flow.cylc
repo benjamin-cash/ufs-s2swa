@@ -17,12 +17,11 @@
     [[graph]]
         R1 = """
             est_run_dir<ldate,mem> => 
-            copy_exec_fixed_files<ldate,mem> =>
-            expand_templates<ldate,mem> => run_model<ldate,mem> => update_restart<ldate,mem>
+            create_initial_input_nml<ldate,mem> => run_model<ldate,mem> => create_restart_input_nml<ldate,mem>
         """
         P1 = """
-            run_model<ldate,mem>=>update_restart<ldate,mem>
-            update_restart<ldate,mem>[-P1] => run_model<ldate,mem>
+            run_model<ldate,mem>=>create_restart_input_nml<ldate,mem>
+            create_restart_input_nml<ldate,mem>[-P1] => run_model<ldate,mem>
         """
         
    
