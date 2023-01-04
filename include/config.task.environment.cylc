@@ -1,0 +1,49 @@
+    [[FILE_PATHS_ENV]]
+	    [[[environment]]]
+            INPUT_ROOT_DIR={{WORK}}/ufs_input/{{EXPTYPE}}
+            RUN_ROOT_DIR={{SCRATCH}}/{{EXPTYPE}}/{{EXPNAME}}.{{NHOURS}}.x{{LAYOUT_X}}.y{{LAYOUT_Y}}.cpn{{CORES_PER_NODE}}.wg{{WRITE_GROUPS}}.wt{{WRITE_TASKS}}/run
+	    	POST_ROOT_DIR={{SCRATCH}}/{{EXPTYPE}}/{{EXPNAME}}.{{NHOURS}}.x{{LAYOUT_X}}.y{{LAYOUT_Y}}.cpn{{CORES_PER_NODE}}.wg{{WRITE_GROUPS}}.wt{{WRITE_TASKS}}/post
+			SCRIPT_ROOT_DIR={{WORK}}/workflow/{{EXPTYPE}}/bin
+            RESOL = {{RESOL}}
+
+    [[MODEL_CONFIG_ENV]]
+        inherit=FILE_PATHS_ENV
+        [[[environment]]]
+            NHOURS = {{NHOURS}}
+            USERID = {{USERID}}
+            LAYOUT_X={{LAYOUT_X}}
+            LAYOUT_Y={{LAYOUT_Y}}
+            WRITE_GROUPS={{WRITE_GROUPS}}
+            WRITE_TASKS={{WRITE_TASKS}}
+            NPROCS_OCN={{NPROCS_OCN}}
+            NPROCS_ICE={{NPROCS_ICE}}
+	    	NPROCS_WW3={{NPROCS_WW3}}
+            NPROCS={{NPROCS}}
+            DT_ATM={{DT_ATM}}
+			NPX={{NPX}}
+			NPY={{NPY}}
+			SOILM={{SOILM}}
+            MED_PE_STR={{MED_PE_STR}}
+            MED_PE_END={{MED_PE_END}}
+            CHM_PE_STR={{CHM_PE_STR}}
+            CHM_PE_END={{CHM_PE_END}}
+            ATM_PE_STR={{ATM_PE_STR}}
+            ATM_PE_END={{ATM_PE_END}}
+            OCN_PE_STR={{OCN_PE_STR}}
+            OCN_PE_END={{OCN_PE_END}}
+            ICE_PE_STR={{ICE_PE_STR}}
+            ICE_PE_END={{ICE_PE_END}}
+            WW3_PE_STR={{WW3_PE_STR}}
+            WW3_PE_END={{WW3_PE_END}}
+
+	[[POSTPROC_CONFIG_ENV]]
+		inherit=FILE_PATHS_ENV
+		[[[environment]]]
+	   	    SFCF_VARS="prateb_ave cpratb_ave tmp2m tmpsfc spfh2m hpbl shtfl_ave lhtfl_ave dswrf_ave uswrf_ave dlwrf_ave ulwrf_ave icec icetk"
+		    OCN_VARS="SST SSH SSS MLD_003"
+		    VINTRP_VARS="ugrd vgrd hgtz tmp spfh dzdt cld_amt"
+
+     [[STAGE_FILES]]
+        inherit = FILE_PATHS_ENV
+
+
