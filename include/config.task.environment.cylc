@@ -43,7 +43,8 @@
 		    OCN_VARS="SST SSH SSS MLD_003"
 		    VINTRP_VARS="ugrd vgrd hgtz tmp spfh dzdt cld_amt"
 
-     [[STAGE_FILES]]
+     [[CREATE_INITIAL]]
         inherit = FILE_PATHS_ENV
-
+        [[[environment]]]
+            %include include/config.prototype-p8.initial.input.nml.cylc
 
