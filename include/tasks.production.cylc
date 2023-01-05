@@ -21,6 +21,15 @@
             output = "model_configure"
             %include include/config.prototype-p8.base.model_configure.cylc 
 
+    [[create_initial_input_nml<ldate,mem>]]
+        inherit = CREATE_INITIAL
+        script = "bash generate_model_files_from_templates.sh"
+        [[[environment]]]
+            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/ice_in_template"
+            output = "ice_in"
+            %include include/config.prototype-p8.base.ice_in.cylc
+            %include include/config.prototype-p8.initial.ice_in.cylc
+
     [[create_restart_input_nml<ldate,mem>]]
         inherit = CREATE_RESTART
         script = "bash generate_model_files_from_templates.sh"
@@ -37,6 +46,15 @@
             input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/model_configure.IN"
             output = "model_configure.restart"
             %include include/config.prototype-p8.base.model_configure.cylc
+
+    [[create_restart_ice_in<ldate,mem>]]
+        inherit = CREATE_RESTART
+        script = "bash generate_model_files_from_templates.sh"
+        [[[environment]]]
+            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/ice_in_template"
+            output = "ice_in.restart"
+            %include include/config.prototype-p8.base.ice_in.cylc
+            %include include/config.prototype-p8.restart.ice_in.cylc
  
     [[run_model<ldate,mem>]]
         inherit = MODEL_CONFIG_ENV
