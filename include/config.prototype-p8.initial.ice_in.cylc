@@ -1,0 +1,2 @@
+CICERUNTYPE = 'initial'
+USE_RESTART_TIME = .false.

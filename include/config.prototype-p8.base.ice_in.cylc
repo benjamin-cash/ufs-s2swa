@@ -1,0 +1,21 @@
+Values needed for this template are:
+BLCKX = 60
+BLCKY = 540
+CICEGRID = 'grid_cice_NEMS_mx025.nc'
+CICEMASK = 'kmtu_cice_NEMS_mx025.nc'
+CICE_DECOMP = 'slenderX2'
+CICE_HIST_AVG = .true.
+DT_CICE = {{DT_ATM}}
+DUMPFREQ = 'h'
+DUMPFREQ_N = 840
+FRAZIL_FWSALT = .true.
+GRIDATM = 'A'
+GRIDICE = 'B'
+GRIDOCN = 'A'
+KTHERM = 2
+NPROC_ICE = {{NPROCS_ICE}}
+NX_GLB = 1400
+NY_GLB = 1080
+RUNID = 'unknown'
+SECS = 00
+TFREEZE_OPTION = 'mushy'

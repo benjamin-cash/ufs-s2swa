@@ -1,0 +1,2 @@
+CICERUNTYPE = 'continue'
+USE_RESTART_TIME = .true.
