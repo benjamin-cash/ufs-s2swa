@@ -17,11 +17,11 @@
     [[graph]]
         R1 = """
             est_run_dir<ldate,mem> => 
-            CREATE_INITIAL:succeed-all => run_model<ldate,mem> => create_restart_input_nml<ldate,mem>
+            CREATE_INITIAL:succeed-all => run_model<ldate,mem> => CREATE_RESTART
         """
         P1 = """
-            run_model<ldate,mem>=>create_restart_input_nml<ldate,mem>
-            create_restart_input_nml<ldate,mem>[-P1] => run_model<ldate,mem>
+            run_model<ldate,mem>=> CREATE_RESTART
+            CREATE_RESTART[-P1]:succeed-all => run_model<ldate,mem>
         """
         
    

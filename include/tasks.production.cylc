@@ -10,15 +10,34 @@
         [[[environment]]]
             input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/cpld_control.nml.IN"
             output = "input.nml" 
+            %include include/config.prototype-p8.base.input.nml.cylc 
+            %include include/config.prototype-p8.initial.input.nml.cylc 
+   
+    [[create_initial_model_configure<ldate,mem>]]
+        inherit = CREATE_INITIAL
+        script = "bash generate_model_files_from_templates.sh"
+        [[[environment]]]
+            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/model_configure.IN"
+            output = "model_configure"
+            %include include/config.prototype-p8.base.model_configure.cylc 
 
     [[create_restart_input_nml<ldate,mem>]]
-        inherit = MODEL_CONFIG_ENV
+        inherit = CREATE_RESTART
         script = "bash generate_model_files_from_templates.sh"
         [[[environment]]]
             input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/cpld_control.nml.IN"
-            output = "input.nml"
+            output = "input.nml.restart"
+            %include include/config.prototype-p8.base.input.nml.cylc
             %include include/config.prototype-p8.restart.input.nml.cylc
 
+    [[create_restart_model_configure<ldate,mem>]]
+        inherit = CREATE_RESTART
+        script = "bash generate_model_files_from_templates.sh"
+        [[[environment]]]
+            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/model_configure.IN"
+            output = "model_configure.restart"
+            %include include/config.prototype-p8.base.model_configure.cylc
+ 
     [[run_model<ldate,mem>]]
         inherit = MODEL_CONFIG_ENV
         script = "echo run model"
