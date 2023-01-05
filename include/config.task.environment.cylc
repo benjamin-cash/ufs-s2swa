@@ -46,5 +46,10 @@
      [[CREATE_INITIAL]]
         inherit = FILE_PATHS_ENV
         [[[environment]]]
+            %include include/config.prototype-p8.base.input.nml.cylc
             %include include/config.prototype-p8.initial.input.nml.cylc
-
+    [[CREATE_RESTART]]
+        inherit = FILE_PATHS_ENV
+        [[[environment]]]
+            %include include/config.prototype-p8.base.input.nml.cylc
+            %include include/config.prototype-p8.initial.input.nml.cylc
