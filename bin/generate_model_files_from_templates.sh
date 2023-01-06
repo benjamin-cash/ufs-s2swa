@@ -18,6 +18,22 @@ export FHROT=$(( (CYLC_TASK_CYCLE_POINT-1)*NHOURS ))
 export FHMAX=$(( (CYLC_TASK_CYCLE_POINT)*NHOURS ))
 echo $CYLC_TASK_CYCLE_POINT $CYLC_NHOURS
 
+DATE_BEG=$(date -ud "$SYEAR$SMONTH$SDAY $SHOUR:00:00UTC + $FHROT hours" +%Y%m%d%H)
+BYEAR=${DATE_BEG:0:4}
+BMONTH=${DATE_BEG:4:2}
+BDAY=${DATE_BEG:6:2}
+BHOUR=${DATE_BEG:8:2}
+export RUN_BEG="${BYEAR}${BMONTH}${BDAY} $(printf "%02d" $(( ${BHOUR}  )))0000"
+
+DATE_END=$(date -ud "$SYEAR$SMONTH$SDAY $SHOUR:00:00UTC + $FHMAX hours" +%Y%m%d%H)
+EYEAR=${DATE_END:0:4}
+EMONTH=${DATE_END:4:2}
+EDAY=${DATE_END:6:2}
+EHOUR=${DATE_END:8:2}
+export RUN_END="${EYEAR}${EMONTH}${EDAY} $(printf "%02d" $(( ${EHOUR}  )))0000"
+
+echo $FHROT $FHMAX $RUN_BEG $RUN_END
+
 # Calculate ISEED_CA based on ldate and ensemble member
 CDATE=${CYLC_TASK_PARAM_ldate:0:8}
 MNUM=10#${MEMBER:3:3}
