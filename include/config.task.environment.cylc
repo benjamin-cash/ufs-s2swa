@@ -4,13 +4,13 @@
             RUN_ROOT_DIR={{SCRATCH}}/{{EXPTYPE}}/{{EXPNAME}}.{{NHOURS}}.x{{LAYOUT_X}}.y{{LAYOUT_Y}}.cpn{{CORES_PER_NODE}}.wg{{WRITE_GROUPS}}.wt{{WRITE_TASKS}}/run
 	    	POST_ROOT_DIR={{SCRATCH}}/{{EXPTYPE}}/{{EXPNAME}}.{{NHOURS}}.x{{LAYOUT_X}}.y{{LAYOUT_Y}}.cpn{{CORES_PER_NODE}}.wg{{WRITE_GROUPS}}.wt{{WRITE_TASKS}}/post
 			SCRIPT_ROOT_DIR={{WORK}}/workflow/{{EXPTYPE}}/bin
-            RESOL = {{RESOL}}
 
     [[MODEL_CONFIG_ENV]]
         inherit=FILE_PATHS_ENV
         [[[environment]]]
             NHOURS = {{NHOURS}}
             USERID = {{USERID}}
+            RESOL == {{RESOL}}
             LAYOUT_X={{LAYOUT_X}}
             LAYOUT_Y={{LAYOUT_Y}}
             WRITE_GROUPS={{WRITE_GROUPS}}
@@ -36,8 +36,13 @@
             WW3_PE_STR={{WW3_PE_STR}}
             WW3_PE_END={{WW3_PE_END}}
 
+    [[PREPROC_CONFIG_ENV]]
+        inherit=MODEL_CONFIG_ENV
+        [[[environment]]]
+            SUBDIRS="INPUT MOM6_OUTPUT MOM6_RESTART RESTART history restart_wave"
+
 	[[POSTPROC_CONFIG_ENV]]
-		inherit=FILE_PATHS_ENV
+		inherit=MODEL_CONFIG_ENV
 		[[[environment]]]
 	   	    SFCF_VARS="prateb_ave cpratb_ave tmp2m tmpsfc spfh2m hpbl shtfl_ave lhtfl_ave dswrf_ave uswrf_ave dlwrf_ave ulwrf_ave icec icetk"
 		    OCN_VARS="SST SSH SSS MLD_003"

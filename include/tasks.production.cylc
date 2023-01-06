@@ -1,5 +1,5 @@
     [[est_run_dir<ldate,mem>]]
-    	inherit = MODEL_CONFIG_ENV
+    	inherit = PREPROC_CONFIG_ENV
 	    script = "bash establish_run_directory.sh"
         [[[environment]]]
             CLEAN_FLAG = {{CLEAN_FLAG}}

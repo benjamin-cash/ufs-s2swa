@@ -18,11 +18,9 @@ if [ -d $RUNDIR ]; then
         exit 1
     fi
 fi
-SUBDIRS=("INPUT" "MOM6_OUTPUT" "MOM6_RESTART" "RESTART" "history" "restart_wave")
 echo $SUBDIRS
 
 for SUBDIR in ${SUBDIRS[@]}; do
-	echo "WTF?"
 	echo $RUNDIR/$SUBDIR 
     if ! [ -e $RUNDIR/SUBDIR ]; then
         mkdir -p $RUNDIR/$SUBDIR
