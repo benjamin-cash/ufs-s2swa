@@ -1,5 +1,8 @@
 #!/usr/bin/bash -f
 
+# This is a harness that allows for testing of script changes without creating an entirely new 
+# cylc workflow installation. 
+
 export CYLC_TASK_PARAM_mem="mem001"
 export RUN_ROOT_DIR="/scratch1/02441/bcash/prototype-p8/ufs-s2swa.test.744.x12.y16.cpn36.wg3.wt108/run"
 export CYLC_TASK_PARAM_ldate=2012010100
