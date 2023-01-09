@@ -1,0 +1,77 @@
+    [[copy_exec_fixed_files<ldate,mem>]]
+    	inherit = STAGE_FILES
+        script = "bash stage_model_files.sh"
+		[[[environment]]]
+			SUBDIR = "EXEC"
+			FLIST = "ufs-s2swa.file_list.txt"	
+            CMD = "cp"
+
+    [[copy_fv3_fix_files<ldate,mem>]]
+        inherit = STAGE_FILES
+        script = "bash stage_model_files.sh"
+        [[[environment]]]
+	        SUBDIR ="FV3"
+			FLIST = "fix.file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_fv3_resol_files<ldate,mem>]]
+        inherit = STAGE_FILES
+        script = "bash stage_model_files.sh"
+        [[[environment]]]
+            SUBDIR ="FV3"
+            FLIST = "{{RESOL}}.file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_cpl_fixed_files<ldate,mem>]]
+    	inherit = STAGE_FILES
+	   	script = "bash stage_model_files.sh"
+		[[[environment]]]
+	        SUBDIR ="CPL"
+			FLIST = "{{RESOL}}.file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_mom6_fixed_files<ldate,mem>]]
+	    inherit = STAGE_FILES
+	    script = "bash stage_model_files.sh"
+	    [[[environment]]]
+		    SUBDIR ="MOM6"
+		    FLIST = "file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_cice6_fixed_files<ldate,mem>]]
+	    inherit = STAGE_FILES
+	    script = "bash stage_model_files.sh"
+	    [[[environment]]]
+		    SUBDIR ="CICE6"
+		    FLIST = "file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_ww3_fixed_files<ldate,mem>]]
+	    inherit = STAGE_FILES
+	    script = "bash stage_model_files.sh"
+	    [[[environment]]]
+		    SUBDIR ="WW3"
+		    FLIST = "file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_post_files<ldate,mem>]]
+	    inherit = STAGE_FILES
+ 	    script = "bash stage_model_files.sh"
+	    [[[environment]]]
+        	SUBDIR="POST"
+	        FLIST = "file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_aero_fixed_files<ldate,mem>]]
+        inherit = STAGE_FILES
+        script = "bash stage_model_files.sh"
+        [[[environment]]]
+            SUBDIR ="AERO"
+            FLIST = "file_list.txt"
+            CMD = "ln -s"
+
+    [[copy_ic_files<ldate,mem>]]
+	    inherit = STAGE_FILES
+	    script = "bash stage_ic_files.sh"
+	    [[[environment]]]
+			SUBDIR="IC"

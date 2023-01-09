@@ -2,7 +2,7 @@
 {% set NHOURS = 1*24 %}
 {% set RUNLEN = "PT1H" %}
 {% set EXPTYPE = "prototype-p8" %}
-{% set EXPNAME = "ufs-s2swa.test" %}
+{% set EXPNAME = "ufs-s2swa.production.test" %}
 {% set CLEAN_FLAG = ".true." %}
 {% set CORES_PER_NODE = 36 %}
 

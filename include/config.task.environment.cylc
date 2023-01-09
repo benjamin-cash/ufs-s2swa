@@ -10,7 +10,7 @@
         [[[environment]]]
             NHOURS = {{NHOURS}}
             USERID = {{USERID}}
-            RESOL == {{RESOL}}
+            RESOL = {{RESOL}}
             LAYOUT_X={{LAYOUT_X}}
             LAYOUT_Y={{LAYOUT_Y}}
             WRITE_GROUPS={{WRITE_GROUPS}}
@@ -47,6 +47,9 @@
 	   	    SFCF_VARS="prateb_ave cpratb_ave tmp2m tmpsfc spfh2m hpbl shtfl_ave lhtfl_ave dswrf_ave uswrf_ave dlwrf_ave ulwrf_ave icec icetk"
 		    OCN_VARS="SST SSH SSS MLD_003"
 		    VINTRP_VARS="ugrd vgrd hgtz tmp spfh dzdt cld_amt"
+    
+    [[STAGE_FILES]]
+        inherit = MODEL_CONFIG_ENV
 
     [[CREATE_INITIAL]]
         inherit = MODEL_CONFIG_ENV

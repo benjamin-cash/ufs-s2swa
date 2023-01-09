@@ -1,100 +1,12 @@
-    [[est_run_dir<ldate,mem>]]
-    	inherit = PREPROC_CONFIG_ENV
-	    script = "bash establish_run_directory.sh"
-        [[[environment]]]
-            CLEAN_FLAG = {{CLEAN_FLAG}}
-
-    [[create_initial_input_nml<ldate,mem>]]
-        inherit = CREATE_INITIAL
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/cpld_control.nml.IN"
-            output = "input.nml" 
-            %include include/config.prototype-p8.base.input.nml.cylc 
-            %include include/config.prototype-p8.initial.input.nml.cylc 
-   
-    [[create_initial_model_configure<ldate,mem>]]
-        inherit = CREATE_INITIAL
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/model_configure.IN"
-            output = "model_configure"
-            %include include/config.prototype-p8.base.model_configure.cylc 
-
-    [[create_initial_ice_in<ldate,mem>]]
-        inherit = CREATE_INITIAL
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/ice_in_template"
-            output = "ice_in"
-            %include include/config.prototype-p8.base.ice_in.cylc
-            %include include/config.prototype-p8.initial.ice_in.cylc
-    
-    [[create_initial_nems_configure<ldate,mem>]]
-        inherit = CREATE_INITIAL
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/nems.configure.cpld.IN"
-            output = "nems.configure"
-            %include include/config.prototype-p8.base.nems.configure.cylc
-            %include include/config.prototype-p8.initial.nems.configure.cylc
-    
-    [[create_initial_diag_table<ldate,mem>]]
-        inherit = CREATE_INITIAL
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs_input/prototype-p8/EXEC/diag_table.tendencies.IN"
-            output = "diag_table"
-    
-    [[create_initial_ww3_shel_inp<ldate,mem>]]
-        inherit = CREATE_INITIAL
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/ww3_shel.inp.IN"
-            output = "ww3_shel.inp"
-  
-    [[create_restart_input_nml<ldate,mem>]]
-        inherit = CREATE_RESTART
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/cpld_control.nml.IN"
-            output = "input.nml.restart"
-            %include include/config.prototype-p8.base.input.nml.cylc
-            %include include/config.prototype-p8.restart.input.nml.cylc
-
-    [[create_restart_model_configure<ldate,mem>]]
-        inherit = CREATE_RESTART
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/model_configure.IN"
-            output = "model_configure.restart"
-            %include include/config.prototype-p8.base.model_configure.cylc
-
-    [[create_restart_ice_in<ldate,mem>]]
-        inherit = CREATE_RESTART
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/ice_in_template"
-            output = "ice_in.restart"
-            %include include/config.prototype-p8.base.ice_in.cylc
-            %include include/config.prototype-p8.restart.ice_in.cylc
-
-    [[create_restart_nems_configure<ldate,mem>]]
-        inherit = CREATE_RESTART
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/nems.configure.cpld.IN"
-            output = "nems.configure.restart"
-            %include include/config.prototype-p8.base.nems.configure.cylc
-            %include include/config.prototype-p8.restart.nems.configure.cylc
-
-    [[create_initial_ww3_shel_inp<ldate,mem>]]
-        inherit = CREATE_RESTART
-        script = "bash generate_model_files_from_templates.sh"
-        [[[environment]]]
-            input = "/work2/02441/bcash/frontera/ufs-weather-model/prototype-p8/tests/parm/ww3_shel.inp.IN"
-            output = "ww3_shel.inp.restart"
- 
     [[run_model<ldate,mem>]]
         inherit = MODEL_CONFIG_ENV
-        script = "echo run model"
+         platform = frontera
+        execution time limit = {{RUNLEN}}
+        script = "bash run_model.sh"
+        [[[directives]]]
+            --partition={{QUEUE}}
+            --account={{ACCOUNT}}
+            --nodes={{NNODES}}
+            --ntasks-per-node={{CORES_PER_NODE}}
+            --mail-user = {{USER_EMAIL}}
+

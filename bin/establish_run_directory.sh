@@ -3,6 +3,7 @@
 MEMBER=$CYLC_TASK_PARAM_mem
 RUNDIR=$RUN_ROOT_DIR/$CYLC_TASK_PARAM_ldate/$RESOL/$MEMBER
 
+echo $MEMBER
 echo "path variables"
 echo $RUNDIR
 

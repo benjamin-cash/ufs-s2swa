@@ -13,10 +13,20 @@
 [scheduling]
     cycling mode = integer
     initial cycle point = 1
-    final cycle point = 2
+    final cycle point = 1
     [[graph]]
         R1 = """
             est_run_dir<ldate,mem> => 
+            copy_exec_fixed_files<ldate,mem> =>
+            copy_fv3_fix_files<ldate,mem> =>
+            copy_fv3_resol_files<ldate,mem> =>
+            copy_cpl_fixed_files<ldate,mem> =>
+            copy_mom6_fixed_files<ldate,mem> =>
+            copy_cice6_fixed_files<ldate,mem> =>
+            copy_ww3_fixed_files<ldate,mem> =>
+            copy_post_files<ldate,mem> =>
+            copy_aero_fixed_files<ldate,mem> =>
+            copy_ic_files<ldate,mem> =>
             CREATE_INITIAL:succeed-all => run_model<ldate,mem> => CREATE_RESTART
         """
         P1 = """
@@ -31,5 +41,7 @@
 	%include include/config.task.environment.cylc
 
 # Specify pre-processing and prodcution tasks
+    %include include/tasks.setup.run.directory.cylc
+    %include include/tasks.expand.templates.cylc
     %include include/tasks.production.cylc
 
