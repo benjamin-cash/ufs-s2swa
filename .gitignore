@@ -1,2 +1,3 @@
 include/config.frontera.cylc
 include/config.user.cylc
+*.nc
