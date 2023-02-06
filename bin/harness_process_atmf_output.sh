@@ -16,8 +16,8 @@ export POST_ROOT_DIR="${ROOT_DIR}/post"
 export CYLC_TASK_PARAM_ldate=2012010100
 export RESOL="C384"
 export CYLC_TASK_CYCLE_POINT=1
-export NHOURS=48
+export NHOURS=8928
 . ./date_manipulation.sh
 mkdir -p $POSTDIR
-export VINTRP_VARS="u v t w gh q"
-python $WORK/workflow/ufs-s2swa/bin/process_grib_output.py
+export ATMF_VARS="pressfc delz hgtsfc"
+python $WORK/workflow/ufs-s2swa/bin/process_atmf_output.py

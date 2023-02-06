@@ -19,5 +19,5 @@ export CYLC_TASK_CYCLE_POINT=1
 export NHOURS=48
 . ./date_manipulation.sh
 mkdir -p $POSTDIR
-export VINTRP_VARS="u v t w gh q"
-python $WORK/workflow/ufs-s2swa/bin/process_grib_output.py
+export SFCF_VARS="prateb_ave cpratb_ave tmp2m tmpsfc spfh2m hpbl shtfl_ave lhtfl_ave dswrf_ave uswrf_ave dlwrf_ave ulwrf_ave icec icetk dtend_temp_lw dtend_temp_sw dtend_temp_pbl dtend_temp_deepcnv dtend_temp_shalcnv dtend_temp_mp dtend_temp_orogwd dtend_temp_cnvgwd dtend_temp_phys"
+python $WORK/workflow/ufs-s2swa/bin/process_sfcf_output.py
