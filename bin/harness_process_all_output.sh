@@ -1,4 +1,13 @@
 #!/usr/bin/bash -f
+#SBATCH -J post_process           # Job name
+#SBATCH -o post_process.o%j       # Name of stdout output file
+#SBATCH -e post_process.e%j       # Name of stderr error file
+#SBATCH -p small           # Queue (partition) name
+#SBATCH -N 1               # Total # of nodes (must be 1 for serial)
+#SBATCH -n 56               # Total # of mpi tasks (should be 1 for serial)
+#SBATCH -t 12:00:00        # Run time (hh:mm:ss)
+#SBATCH --mail-type=all    # Send email at begin and end of job
+#SBATCH -A ATM22010       # Project/Allocation name (req'd if you have more than 1)
 
 # This is a harness that allows for testing of script changes without creating an entirely new 
 # cylc workflow installation. 
@@ -15,16 +24,11 @@ export RUN_ROOT_DIR="${ROOT_DIR}/run"
 export POST_ROOT_DIR="${ROOT_DIR}/post"
 export CYLC_TASK_PARAM_ldate=2012010100
 export RESOL="C384"
-export CYLC_TASK_CYCLE_POINT=2
-export NHOURS=4464
+export CYLC_TASK_CYCLE_POINT=1
+export NHOURS=48
 . ./date_manipulation.sh
 mkdir -p $POSTDIR
-export SFCF_VARS="prateb_ave cpratb_ave tmp2m tmpsfc spfh2m hpbl shtfl_ave lhtfl_ave dswrf_ave uswrf_ave dlwrf_ave ulwrf_ave icec icetk dtend_temp_lw dtend_temp_sw dtend_temp_pbl dtend_temp_deepcnv dtend_temp_shalcnv dtend_temp_mp dtend_temp_orogwd dtend_temp_cnvgwd dtend_temp_phys"
-export SFCF_VARS="prateb_ave"
-export VINTRP_VARS="gh"
-export OCN_VARS="SST"
-python $WORK/workflow/ufs-s2swa/bin/process_sfcf_output.py
-#export VINTRP_VARS="u v t w gh q"
-python $WORK/workflow/ufs-s2swa/bin/process_grib_output.py
-#export OCN_VARS="SST SSH SSS MLD_003"
-python $WORK/workflow/ufs-s2swa/bin/process_ocean_output.py
+bash harness_process_sfcf_output.sh
+bash harness_process_atmf_output.sh
+bash harness_process_grib_output.sh
+bash harness_process_ocean_output.sh
